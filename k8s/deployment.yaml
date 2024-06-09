@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daily-workout-deployment
+  labels:
+    app: daily-workout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: daily-workout
+  template:
+    metadata:
+      labels:
+        app: daily-workout
+    spec:
+      containers:
+      - name: daily-workout
+        image: ghcr.io/gerrited/daily-workout:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
