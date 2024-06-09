@@ -2,6 +2,6 @@ FROM node:14
 
 WORKDIR /usr/src/app
 
-COPY generateWorkout.js .
+COPY app.js .
 
 CMD ["node", "app.js"]
