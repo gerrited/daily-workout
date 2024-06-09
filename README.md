@@ -98,10 +98,7 @@ The GitHub Actions workflow builds and pushes the Docker image to the GitHub Con
 
 ## Styles
 
-### Adjusting Table Width for Mobile Devices
-
 **src/frontend/public/styles.css**
-
 
 ## Contributions
 
