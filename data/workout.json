@@ -1,0 +1,9 @@
+{
+    "date": "2024-06-09",
+    "exercises": [
+      { "name": "Push-ups", "reps": "3 x 15" },
+      { "name": "Squats", "reps": "3 x 20" },
+      { "name": "Pull-ups", "reps": "3 x 10" },
+      { "name": "Burpees", "reps": "3 x 12" }
+    ]
+  }

@@ -1,20 +1,21 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const router = express.Router();
-
-// Sample workout data
-const workout = {
-  date: new Date().toLocaleDateString(),
-  exercises: [
-    { name: 'Push-ups', reps: '3 x 15' },
-    { name: 'Squats', reps: '3 x 20' },
-    { name: 'Pull-ups', reps: '3 x 10' },
-    { name: 'Burpees', reps: '3 x 12' }
-  ]
-};
 
 // Main route
 router.get('/', (req, res) => {
-  res.render('index', { workout });
+  const filePath = path.join(__dirname, '..', 'data', 'workout.json');
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading workout.json:', err);
+      return res.status(500).send('Error reading workout data');
+    }
+
+    const workout = JSON.parse(data);
+    res.render('index', { workout });
+  });
 });
 
 module.exports = router;
