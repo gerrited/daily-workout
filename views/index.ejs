@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Workout</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <img src="/logo.webp" alt="Daily Workout Logo" class="logo">
+  </header>
+  <main>
+    <h1>Workout for <%= workout.date %></h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Exercise</th>
+          <th>Reps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% workout.exercises.forEach(exercise => { %>
+          <tr>
+            <td><%= exercise.name %></td>
+            <td><%= exercise.reps %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

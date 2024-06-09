@@ -1,0 +1,36 @@
+body {
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    padding: 10px;
+  }
+  
+  .logo {
+    height: 200px;
+  }
+  
+  main {
+    padding: 10px;
+  }
+  
+  table {
+    text-align: left;
+    width: 50%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
