@@ -1,5 +1,5 @@
 {
-  "date": "6/9/2024",
+  "date": "9.6.2024",
   "exercises": [
     {
       "name": "Push-ups",
@@ -7,15 +7,15 @@
     },
     {
       "name": "Squats",
-      "reps": "3 x 39"
+      "reps": "3 x 40"
     },
     {
       "name": "Pull-ups",
-      "reps": "3 x 13"
+      "reps": "3 x 7"
     },
     {
       "name": "Burpees",
-      "reps": "3 x 12"
+      "reps": "3 x 24"
     }
   ]
 }

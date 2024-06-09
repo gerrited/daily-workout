@@ -13,7 +13,7 @@ function generateWorkout() {
   };
 }
 
-const filePath = path.join('data', 'workout.json');
+const filePath = path.join(__dirname, 'data', 'workout.json');
 
 const workout = generateWorkout();
 fs.writeFile(filePath, JSON.stringify(workout, null, 2), (err) => {
