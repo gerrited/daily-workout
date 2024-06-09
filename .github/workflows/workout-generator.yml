@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - src/workout-generator/**
 
 jobs:
   build-and-push:
