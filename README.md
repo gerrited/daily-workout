@@ -1,13 +1,14 @@
 ![alt text](src/frontend/public/logo.webp)
 
+> [!NOTE]  
+> The logo and the app were created with ChatGPT ([Log](https://chatgpt.com/share/4b672034-b608-4c75-8802-30076b0da60a)).
+
 # Daily Workout
 It is a web application that displays a new AI-generated workout every day.
 
 [Demo](https://daily-workout.g11s.cc/)
 
 ## Project Overview
-Created with ChatGPT([Log](https://chatgpt.com/share/4b672034-b608-4c75-8802-30076b0da60a)).
-
 This Nodes.js web application displays a daily Crossfit workout on a webpage. The page includes a logo at the top and the workout in a table in the center. The workouts are generated once daily and stored in a JSON file managed by a Kubernetes CronJob.
 
 ## Table of Contents
