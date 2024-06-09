@@ -13,7 +13,13 @@ function generateWorkout() {
   };
 }
 
-const filePath = path.join(__dirname, 'data', 'workout.json');
+const dirPath = path.join(__dirname, 'data');
+const filePath = path.join(dirPath, 'workout.json');
+
+// Verzeichnis erstellen, falls nicht vorhanden
+if (!fs.existsSync(dirPath)) {
+  fs.mkdirSync(dirPath, { recursive: true });
+}
 
 const workout = generateWorkout();
 fs.writeFile(filePath, JSON.stringify(workout, null, 2), (err) => {
