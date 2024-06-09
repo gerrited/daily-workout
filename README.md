@@ -1,3 +1,5 @@
+![alt text](src/frontend/public/logo.webp)
+
 # Daily Workout
 It is a web application that displays a new AI-generated workout every day.
 
