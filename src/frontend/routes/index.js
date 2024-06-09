@@ -5,7 +5,15 @@ const router = express.Router();
 
 // Main route
 router.get('/', (req, res) => {
-  const filePath = path.join(__dirname, '..', 'data', 'workout.json');
+
+
+  if (process.env.NODE_ENV === 'development') {
+    var filePath = path.join(__dirname, '..', 'data-example', 'workout.json');
+  }
+  else {
+    var filePath = path.join(__dirname, '..', 'data', 'workout.json');
+  }
+
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
