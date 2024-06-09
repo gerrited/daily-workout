@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: daily-workout-deployment
+  name: daily-workout
   labels:
     app: daily-workout
 spec:
@@ -22,3 +22,24 @@ spec:
         env:
         - name: NODE_ENV
           value: "production"
+        volumeMounts:
+        - mountPath: "/usr/src/app/data"
+          name: workout-volume
+      volumes:
+      - name: workout-volume
+        persistentVolumeClaim:
+          claimName: workout-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: daily-workout
+spec:
+  selector:
+    app: daily-workout
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
