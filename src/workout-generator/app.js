@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// Funktion zum Generieren eines zufälligen Workouts
 function generateWorkout() {
   return {
     date: new Date().toLocaleDateString(),
@@ -14,10 +13,8 @@ function generateWorkout() {
   };
 }
 
-// Pfad zur JSON-Datei
-const filePath = path.join('/mnt/data/workout', 'workout.json');
+const filePath = path.join('data', 'workout.json');
 
-// Workout generieren und in die JSON-Datei schreiben
 const workout = generateWorkout();
 fs.writeFile(filePath, JSON.stringify(workout, null, 2), (err) => {
   if (err) {
