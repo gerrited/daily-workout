@@ -32,6 +32,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ghcr.io/${{ github.repository_owner }}/daily-workout:latest
+          build-args: COMMIT_ID=${{ github.sha }}
 
       - name: Logout from GitHub Container Registry
         run: docker logout ghcr.io
