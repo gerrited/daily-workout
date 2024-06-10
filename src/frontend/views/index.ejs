@@ -30,7 +30,7 @@
         <a href="#"><button class="emoji-button" disabled>⬅️</button></a>
       <% } %>
 
-      <h1>Workout <%= workout.date %></h1>
+      <h1><%= workout.date %></h1>
       <% if (next) { %>
         <a href="/<%= next %>"><button class="emoji-button">➡️</button></a>
       <% } else { %>
