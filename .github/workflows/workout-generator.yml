@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/workout-generator.yml
       - src/workout-generator/**
 
 jobs:
