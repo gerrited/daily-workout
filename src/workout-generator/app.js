@@ -63,7 +63,7 @@ async function generateWorkout() {
       if (err) {
         console.error('Error writing workout.json:', err);
       } else {
-        console.log('Workout generated and saved successfully!');
+        console.log('Workout ' + filePath + ' generated!');
       }
     });
 
