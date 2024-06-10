@@ -1,6 +1,7 @@
 const OpenAI = require("openai");
 const fs = require('fs');
 const path = require('path');
+const { subDays, format } = require('date-fns');
 require('dotenv').config();
 
 const configuration = {
@@ -57,6 +58,20 @@ async function generateWorkout() {
       fs.mkdirSync(dirPath, { recursive: true });
     }
 
+    if (fs.existsSync(filePath)) {
+      const yesterday = subDays(new Date(), 1);
+      const formattedDate = format(yesterday, 'yyyy-MM-dd');
+      const newFilePath = path.join(dirPath, 'workout-' + formattedDate + '.json');
+
+      fs.copyFile(filePath, newFilePath, (err) => {
+        if (err) {
+          console.error('Error renaming file:', err);
+        } else {
+          console.log('File renamed successfully');
+        }
+      });
+    }
+
     fs.writeFile(filePath, workout, (err) => {
       if (err) {
         console.error('Error writing workout.json:', err);
@@ -64,6 +79,8 @@ async function generateWorkout() {
         console.log('Workout generated and saved successfully!');
       }
     });
+
+
   } catch (error) {
     console.error('Error generating workout:', error.response ? error.response.data : error.message);
   }
