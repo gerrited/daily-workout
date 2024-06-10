@@ -4,6 +4,8 @@ const path = require('path');
 const router = express.Router();
 
 const commitId = process.env.COMMIT_ID || 'unknown';
+const shortCommitId = process.env.COMMIT_ID ? process.env.COMMIT_ID.substring(0, 7) : 'unknown';
+const repoUrl = process.env.REPO_URL || '#';
 
 // Main route
 router.get('/', (req, res) => {
@@ -21,7 +23,7 @@ router.get('/', (req, res) => {
     }
 
     const workout = JSON.parse(data);
-    res.render('index', { workout, commitId });
+    res.render('index', { workout, repoUrl, shortCommitId, commitId });
   });
 });
 
