@@ -6,16 +6,12 @@ html, body {
   text-align: center;
 }
 
-header {
-  padding: 10px;
-}
-
 .logo {
   height: 300px;
 }
 
 main {
-  padding: 20px;
+  padding-bottom: 20px;
   flex: 1 0 auto;
 }
 
@@ -46,19 +42,16 @@ th {
   text-decoration: none;
   margin: 0 10px;
 }
-.navigation span {
-  margin: 0 20px;
-  font-size: 24px;
+.navigation .button-container {
+  width: 100px; /* Ensures consistent width for buttons */
+  text-align: center;
 }
+
 .emoji-button {
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
-}
-.emoji-button:disabled {
-  cursor: not-allowed;
-  color: grey;
 }
 
 footer {
@@ -78,13 +71,8 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Flexbox layout to ensure footer is at the bottom */
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-main {
-  flex: 1;
 }

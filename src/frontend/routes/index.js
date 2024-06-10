@@ -17,15 +17,18 @@ const isValidDate = (dateString) => {
 };
 
 const getWorkoutFilepath = (date) => {
-  const dataString = getDateString(date);
-  const filename = 'workout-' + dataString + '.json';
+  const dateString = getDateString(date);
+  const filename = 'workout-' + dateString + '.json';
 
   if (process.env.NODE_ENV === 'development') {
-    return path.join(__dirname, '..', 'data-example', filename);
+    const todayDateString = getDateString(new Date());
+
+    if (todayDateString == dateString){
+      return path.join(__dirname, '..', 'data-example', "workout.json");
+    }
   }
-  else {
-    return path.join(__dirname, '..', 'data', filename);
-  }
+
+  return path.join(__dirname, '..', 'data', filename);
 }
 
 const workoutExists = (date) => {

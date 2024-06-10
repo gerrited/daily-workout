@@ -24,18 +24,17 @@
   </header>
   <main>
     <div class="navigation">
+      <div class="button-container">
       <% if (previous) { %>
         <a href="/<%= previous %>"><button class="emoji-button">⬅️</button></a>
-      <% } else { %>
-        <a href="#"><button class="emoji-button" disabled>⬅️</button></a>
       <% } %>
-
+      </div>
       <h1><%= workout.date %></h1>
+      <div class="button-container">
       <% if (next) { %>
         <a href="/<%= next %>"><button class="emoji-button">➡️</button></a>
-      <% } else { %>
-        <a href="#"><button class="emoji-button" disabled>➡️</button></a>
       <% } %>
+      </div>
     </div>
     <table>
       <thead>
