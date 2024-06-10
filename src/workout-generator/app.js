@@ -8,21 +8,33 @@ const configuration = {
 };
 
 const openai = new OpenAI(configuration);
-const prompt = 'Create a random workout with exercises, reps, and sets for a full-body workout.';
+const prompt = `
+Generate a JSON object for a daily crossfit workout without equipment. The workout should include the date of today and a list of exercises. Each exercise should have a name and the number of repetitions formatted as "sets x reps". Ensure the JSON follows this structure:
 
-function generateWorkout() {
-  return {
-    date: new Date().toLocaleDateString(),
-    exercises: [
-      { name: 'Push-ups', reps: `3 x ${Math.floor(Math.random() * 20) + 10}` },
-      { name: 'Squats', reps: `3 x ${Math.floor(Math.random() * 30) + 20}` },
-      { name: 'Pull-ups', reps: `3 x ${Math.floor(Math.random() * 15) + 5}` },
-      { name: 'Burpees', reps: `3 x ${Math.floor(Math.random() * 20) + 10}` }
-    ]
-  };
+{
+  "date": "YYYY-MM-DD",
+  "exercises": [
+    { "name": "Exercise Name 1", "reps": "sets x reps" },
+    { "name": "Exercise Name 2", "reps": "sets x reps" },
+    ...
+  ]
 }
 
-async function generateAIWorkout() {
+Here is an example:
+{
+  "date": "2024-06-09",
+  "exercises": [
+    { "name": "Push-ups", "reps": "3 x 15" },
+    { "name": "Squats", "reps": "3 x 20" },
+    { "name": "Pull-ups", "reps": "3 x 10" },
+    { "name": "Burpees", "reps": "3 x 12" }
+  ]
+}
+
+Please generate a new workout for today.
+`;
+
+async function generateWorkout() {
   try {
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
@@ -33,28 +45,28 @@ async function generateAIWorkout() {
       temperature: 0.7,
     });
 
-    const workout = response.choices[0]
-    console.log('Generated Workout:\n', workout);
+    const message = response.choices[0].message.content;
+    const jsonObject = JSON.parse(message);
+    jsonObject.date = new Date().toISOString().split('T')[0];
+    const workout = JSON.stringify(jsonObject, null, 2);
+
+    const dirPath = path.join(__dirname, 'data');
+    const filePath = path.join(dirPath, 'workout.json');
+
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+
+    fs.writeFile(filePath, workout, (err) => {
+      if (err) {
+        console.error('Error writing workout.json:', err);
+      } else {
+        console.log('Workout generated and saved successfully!');
+      }
+    });
   } catch (error) {
     console.error('Error generating workout:', error.response ? error.response.data : error.message);
   }
 }
 
-generateAIWorkout();
-
-const dirPath = path.join(__dirname, 'data');
-const filePath = path.join(dirPath, 'workout.json');
-
-// Verzeichnis erstellen, falls nicht vorhanden
-if (!fs.existsSync(dirPath)) {
-  fs.mkdirSync(dirPath, { recursive: true });
-}
-
-const workout = generateWorkout();
-fs.writeFile(filePath, JSON.stringify(workout, null, 2), (err) => {
-  if (err) {
-    console.error('Error writing workout.json:', err);
-  } else {
-    console.log('Workout generated and saved successfully!');
-  }
-});
+generateWorkout();
