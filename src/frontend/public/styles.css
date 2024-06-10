@@ -1,9 +1,9 @@
-body {
-  background-color: #fff;
-  font-family: Arial, sans-serif;
-  text-align: center;
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 header {
@@ -16,6 +16,7 @@ header {
 
 main {
   padding: 10px;
+  flex: 1;
 }
 
 table {
@@ -53,4 +54,15 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* Flexbox layout to ensure footer is at the bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
 }

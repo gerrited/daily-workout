@@ -1,6 +1,6 @@
 {
     "name": "Daily Workout",
-    "short_name": "Workout",
+    "short_name": "Daily Workout",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
