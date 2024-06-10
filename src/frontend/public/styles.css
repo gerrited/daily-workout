@@ -37,6 +37,29 @@ th {
   background-color: #f4f4f4;
 }
 
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navigation a {
+  text-decoration: none;
+  margin: 0 10px;
+}
+.navigation span {
+  margin: 0 20px;
+  font-size: 24px;
+}
+.emoji-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+.emoji-button:disabled {
+  cursor: not-allowed;
+  color: grey;
+}
 
 footer {
   background-color: #333;

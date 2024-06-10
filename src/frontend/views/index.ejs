@@ -20,10 +20,23 @@
 </head>
 <body>
   <header>
-    <img src="/logo.webp" alt="Daily Workout Logo" class="logo">
+    <a href="/"><img src="/logo.webp" alt="Daily Workout Logo" class="logo"></a>
   </header>
   <main>
-    <h1>Workout <%= workout.date %></h1>
+    <div class="navigation">
+      <% if (previous) { %>
+        <a href="/<%= previous %>"><button class="emoji-button">⬅️</button></a>
+      <% } else { %>
+        <a href="#"><button class="emoji-button" disabled>⬅️</button></a>
+      <% } %>
+
+      <h1>Workout <%= workout.date %></h1>
+      <% if (next) { %>
+        <a href="/<%= next %>"><button class="emoji-button">➡️</button></a>
+      <% } else { %>
+        <a href="#"><button class="emoji-button" disabled>➡️</button></a>
+      <% } %>
+    </div>
     <table>
       <thead>
         <tr>
