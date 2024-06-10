@@ -46,14 +46,14 @@ async function generateWorkout() {
       temperature: 0.7,
     });
 
+    const date = new Date().toISOString().split('T')[0];
     const message = response.choices[0].message.content;
     const jsonObject = JSON.parse(message);
-    jsonObject.date = new Date().toISOString().split('T')[0];
+    jsonObject.date = date;
     const workout = JSON.stringify(jsonObject, null, 2);
 
     const dirPath = path.join(__dirname, 'data');
-    const formattedDate = format(yesterday, 'yyyy-MM-dd');
-    const filePath = path.join(dirPath, 'workout-' + formattedDate + '.json');
+    const filePath = path.join(dirPath, 'workout-' + date + '.json');
 
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true });
