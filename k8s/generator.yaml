@@ -19,3 +19,6 @@ spec:
           - name: workout-volume
             persistentVolumeClaim:
               claimName: workout-pvc
+          env:
+          - name: OPENAI_API_KEY
+            value: "my-openai-api-key"
