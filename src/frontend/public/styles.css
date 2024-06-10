@@ -15,8 +15,8 @@ header {
 }
 
 main {
-  padding: 10px;
-  flex: 1;
+  padding: 20px;
+  flex: 1 0 auto;
 }
 
 table {
@@ -42,9 +42,9 @@ footer {
   background-color: #333;
   color: white;
   padding: 10px;
-  position: fixed;
-  width: 100%;
+  position: sticky;
   bottom: 0;
+  width: 100%;
 }
 
 footer a {
@@ -63,6 +63,6 @@ body {
   min-height: 100vh;
 }
 
-footer {
-  margin-top: auto;
+main {
+  flex: 1;
 }
