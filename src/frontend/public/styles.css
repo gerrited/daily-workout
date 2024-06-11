@@ -8,6 +8,7 @@ html, body {
 
 .logo {
   height: 300px;
+  margin-top: 30px;
 }
 
 main {
@@ -24,13 +25,19 @@ table {
   border-collapse: collapse;
 }
 
+th {
+  background-color: #f4f4f4;
+}
+
 th, td {
+  width: 50%;
   padding: 10px;
   border: 1px solid #ddd;
 }
 
-th {
-  background-color: #f4f4f4;
+td a {
+  color: black;
+  text-decoration: none;
 }
 
 .navigation {

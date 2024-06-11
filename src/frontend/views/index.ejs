@@ -46,7 +46,7 @@
       <tbody>
         <% workout.exercises.forEach(exercise => { %>
           <tr>
-            <td><%= exercise.name %></td>
+            <td><b><a href="https://www.youtube.com/@darebees/search?query=<%= exercise.name %>"><%= exercise.name %></a></b></td>
             <td><%= exercise.reps %></td>
           </tr>
         <% }); %>
