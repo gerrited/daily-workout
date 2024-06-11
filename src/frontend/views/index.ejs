@@ -23,38 +23,55 @@
     <a href="/"><img src="/logo.webp" alt="Daily Workout Logo" class="logo"></a>
   </header>
   <main>
-    <div class="navigation">
-      <div class="button-container">
-      <% if (previous) { %>
-        <a href="/<%= previous %>"><button class="emoji-button">⬅️</button></a>
-      <% } %>
+    <div id="swipeArea">
+      <div class="navigation">
+        <div class="button-container">
+        <% if (previous) { %>
+          <a href="/<%= previous %>"><button class="emoji-button">⬅️</button></a>
+        <% } %>
+        </div>
+        <h1><%= workout.date %></h1>
+        <div class="button-container">
+        <% if (next) { %>
+          <a href="/<%= next %>"><button class="emoji-button">➡️</button></a>
+        <% } %>
+        </div>
       </div>
-      <h1><%= workout.date %></h1>
-      <div class="button-container">
-      <% if (next) { %>
-        <a href="/<%= next %>"><button class="emoji-button">➡️</button></a>
-      <% } %>
-      </div>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Exercise</th>
-          <th>Reps</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% workout.exercises.forEach(exercise => { %>
+      <table>
+        <thead>
           <tr>
-            <td><b><a href="https://www.youtube.com/@darebees/search?query=<%= exercise.name %>"><%= exercise.name %></a></b></td>
-            <td><%= exercise.reps %></td>
+            <th>Exercise</th>
+            <th>Reps</th>
           </tr>
-        <% }); %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% workout.exercises.forEach(exercise => { %>
+            <tr>
+              <td><b><a href="https://www.youtube.com/@darebees/search?query=<%= exercise.name %>"><%= exercise.name %></a></b></td>
+              <td><%= exercise.reps %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
   </main>
   <footer>
     <p> <a href="<%= repoUrl %>">Fork me on GitHub</a> - Commit ID: <a href="<%= repoUrl %>/commit/<%= commitId %>"><%= shortCommitId %></a></p>
   </footer>
+  <script src="node_modules/hammerjs/hammer.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var swipeArea = document.getElementById('swipeArea');
+        var hammer = new Hammer(swipeArea);
+
+        hammer.on('swipeleft', function() {
+          window.location.href = 'https://example.com/up';
+        });
+
+        hammer.on('swiperight', function() {
+          window.location.href = 'https://example.com/down';
+        });
+    });
+</script>
 </body>
 </html>
