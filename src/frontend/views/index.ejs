@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,23 +19,26 @@
     }
   </script>
 </head>
+
 <body>
-  <header>
-    <a href="/"><img src="/logo.webp" alt="Daily Workout Logo" class="logo"></a>
-  </header>
-  <main>
-    <div id="swipeArea">
+  <div id="swipeArea">
+    <header>
+      <a href="/"><img src="/logo.webp" alt="Daily Workout Logo" class="logo"></a>
+    </header>
+    <main>
       <div class="navigation">
         <div class="button-container">
-        <% if (previous) { %>
-          <a href="/<%= previous %>"><button class="emoji-button">⬅️</button></a>
-        <% } %>
+          <% if (previous) { %>
+            <a href="/<%= previous %>"><button class="emoji-button">⬅️</button></a>
+            <% } %>
         </div>
-        <h1><%= workout.date %></h1>
+        <h1>
+          <%= workout.date %>
+        </h1>
         <div class="button-container">
-        <% if (next) { %>
-          <a href="/<%= next %>"><button class="emoji-button">➡️</button></a>
-        <% } %>
+          <% if (next) { %>
+            <a href="/<%= next %>"><button class="emoji-button">➡️</button></a>
+            <% } %>
         </div>
       </div>
       <table>
@@ -45,18 +49,24 @@
           </tr>
         </thead>
         <tbody>
-          <% workout.exercises.forEach(exercise => { %>
+          <% workout.exercises.forEach(exercise=> { %>
             <tr>
-              <td><b><a href="https://www.youtube.com/@darebees/search?query=<%= exercise.name %>"><%= exercise.name %></a></b></td>
-              <td><%= exercise.reps %></td>
+              <td><b><a href="https://www.youtube.com/@darebees/search?query=<%= exercise.name %>">
+                    <%= exercise.name %>
+                  </a></b></td>
+              <td>
+                <%= exercise.reps %>
+              </td>
             </tr>
-          <% }); %>
+            <% }); %>
         </tbody>
       </table>
-    </div>
-  </main>
+    </main>
+  </div>
   <footer>
-    <p> <a href="<%= repoUrl %>">Fork me on GitHub</a> - Commit ID: <a href="<%= repoUrl %>/commit/<%= commitId %>"><%= shortCommitId %></a></p>
+    <p> <a href="<%= repoUrl %>">Fork me on GitHub</a> - Commit ID: <a href="<%= repoUrl %>/commit/<%= commitId %>">
+        <%= shortCommitId %>
+      </a></p>
   </footer>
   <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
 
@@ -64,21 +74,22 @@
     <script>
       var swipeArea = document.getElementById('swipeArea');
       var mc = new Hammer(swipeArea);
-      mc.on("panright", function(ev) {
+      mc.on("panright", function (ev) {
         window.location.href = '/<%= previous %>';
       });
     </script>
-  <% } %>
+    <% } %>
 
-  <% if (next) { %>
-    <script>
-      var swipeArea = document.getElementById('swipeArea');
-      var mc = new Hammer(swipeArea);
-      mc.on("panleft", function(ev) {
-        window.location.href = '/<%= next %>';
-      });
-    </script>
-  <% } %>
+      <% if (next) { %>
+        <script>
+          var swipeArea = document.getElementById('swipeArea');
+          var mc = new Hammer(swipeArea);
+          mc.on("panleft", function (ev) {
+            window.location.href = '/<%= next %>';
+          });
+        </script>
+        <% } %>
 
 </body>
+
 </html>
