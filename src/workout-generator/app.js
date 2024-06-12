@@ -31,8 +31,11 @@ Here is an example:
 }
 `;
 
-function getFileName(dirPath, date){
-  var dataString = date.toISOString().split('T')[0];
+function getDateString(date){
+  return date.toISOString().split('T')[0];
+}
+
+function getFilePath(dirPath, dataString){
   return path.join(dirPath, 'workout-' + dataString + '.json');
 }
 
@@ -44,12 +47,14 @@ async function generateWorkout() {
     }
 
     const date = new Date()
-    var fileName = getFileName(dirPath, date);
+    var dateString = getDateString(date);
+    var filePath = getFilePath(dirPath, dateString);
 
-    if (fs.existsSync(fileName)){
-      console.log(`${fileName} already exists`);
+    if (fs.existsSync(filePath)){
+      console.log(`${filePath} already exists`);
       date.setDate(date.getDate() + 1);
-      fileName = getFileName(dirPath, date);
+      dateString = getDateString(date);
+      filePath = getFilePath(dirPath, dateString);
     }
 
     const response = await openai.chat.completions.create({
@@ -63,14 +68,14 @@ async function generateWorkout() {
 
     const message = response.choices[0].message.content;
     const jsonObject = JSON.parse(message);
-    jsonObject.date = date;
+    jsonObject.date = dateString;
     const workout = JSON.stringify(jsonObject, null, 2);
 
-    fs.writeFile(fileName, workout, (err) => {
+    fs.writeFile(filePath, workout, (err) => {
       if (err) {
         console.error('Error writing workout.json:', err);
       } else {
-        console.log('Workout ' + fileName + ' generated!');
+        console.log('Workout ' + filePath + ' generated!');
       }
     });
 
