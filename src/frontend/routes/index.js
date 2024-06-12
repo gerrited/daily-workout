@@ -1,4 +1,5 @@
 const express = require('express');
+const { getDateString, getFilePath } = require('../../shared/utils');
 const fs = require('fs');
 const path = require('path');
 const router = express.Router();
@@ -8,27 +9,23 @@ const commitId = process.env.COMMIT_ID || 'unknown';
 const shortCommitId = process.env.COMMIT_ID ? process.env.COMMIT_ID.substring(0, 7) : 'unknown';
 const repoUrl = process.env.REPO_URL || '#';
 
-const getDateString = (date) => {
-  return date.toISOString().split('T')[0];
-}
-
 const isValidDate = (dateString) => {
   return validator.isISO8601(dateString, { strict: true });
 };
 
 const getWorkoutFilepath = (date) => {
   const dateString = getDateString(date);
-  const filename = 'workout-' + dateString + '.json';
 
   if (process.env.NODE_ENV === 'development') {
     const todayDateString = getDateString(new Date());
 
-    if (todayDateString == dateString){
+    if (todayDateString == dateString) {
       return path.join(__dirname, '..', 'data-example', "workout.json");
     }
   }
 
-  return path.join(__dirname, '..', 'data', filename);
+  const dirPath = path.join(__dirname, '..', 'data');
+  return getFilePath(dirPath, dateString);
 }
 
 const workoutExists = (date) => {
@@ -70,7 +67,7 @@ router.get('/:date', (req, res) => {
   }
 
   const date = new Date(dateString);
-  if (!workoutExists(date)){
+  if (!workoutExists(date)) {
     return res.status(404).send('Workout file not found');
   }
 
