@@ -10,10 +10,9 @@ const configuration = {
 
 const openai = new OpenAI(configuration);
 const prompt = `
-Generate a JSON object for a daily crossfit workout without equipment. The workout should include the date of today and a list of exercises. Each exercise should have a name and the number of repetitions formatted as "sets x reps". Ensure the JSON follows this structure:
+Generate a JSON object for a workout without equipment. The workout should include 3-5 exercises. Each exercise should have a name and the number of repetitions formatted as "sets x reps". Ensure the JSON follows this structure:
 
 {
-  "date": "YYYY-MM-DD",
   "exercises": [
     { "name": "Exercise Name 1", "reps": "sets x reps" },
     { "name": "Exercise Name 2", "reps": "sets x reps" },
@@ -23,7 +22,6 @@ Generate a JSON object for a daily crossfit workout without equipment. The worko
 
 Here is an example:
 {
-  "date": "2024-06-09",
   "exercises": [
     { "name": "Push-ups", "reps": "3 x 15" },
     { "name": "Squats", "reps": "3 x 20" },
@@ -31,12 +29,29 @@ Here is an example:
     { "name": "Burpees", "reps": "3 x 12" }
   ]
 }
-
-Please generate a new workout for today.
 `;
+
+function getFileName(dirPath, date){
+  var dataString = date.toISOString().split('T')[0];
+  return path.join(dirPath, 'workout-' + dataString + '.json');
+}
 
 async function generateWorkout() {
   try {
+    const dirPath = path.join(__dirname, 'data');
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+
+    const date = new Date()
+    var fileName = getFileName(dirPath, date);
+
+    if (fs.existsSync(fileName)){
+      console.log(`${fileName} already exists`);
+      date.setDate(date.getDate() + 1);
+      fileName = getFileName(dirPath, date);
+    }
+
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{"role": "user", "content": prompt}],
@@ -46,24 +61,16 @@ async function generateWorkout() {
       temperature: 0.7,
     });
 
-    const date = new Date().toISOString().split('T')[0];
     const message = response.choices[0].message.content;
     const jsonObject = JSON.parse(message);
     jsonObject.date = date;
     const workout = JSON.stringify(jsonObject, null, 2);
 
-    const dirPath = path.join(__dirname, 'data');
-    const filePath = path.join(dirPath, 'workout-' + date + '.json');
-
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-    }
-
-    fs.writeFile(filePath, workout, (err) => {
+    fs.writeFile(fileName, workout, (err) => {
       if (err) {
         console.error('Error writing workout.json:', err);
       } else {
-        console.log('Workout ' + filePath + ' generated!');
+        console.log('Workout ' + fileName + ' generated!');
       }
     });
 
