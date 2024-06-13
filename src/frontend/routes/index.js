@@ -1,5 +1,5 @@
 const express = require('express');
-const { getDateString, getFilePath } = require('../../shared/utils');
+// const { getDateString, getFilePath } = require('../../shared/utils');
 const fs = require('fs');
 const path = require('path');
 const router = express.Router();
@@ -8,6 +8,14 @@ const validator = require('validator');
 const commitId = process.env.COMMIT_ID || 'unknown';
 const shortCommitId = process.env.COMMIT_ID ? process.env.COMMIT_ID.substring(0, 7) : 'unknown';
 const repoUrl = process.env.REPO_URL || '#';
+
+const getDateString = (date) => {
+  return date.toISOString().split('T')[0];
+}
+
+const getFilePath = (dirPath, dataString) => {
+  return path.join(dirPath, 'workout-' + dataString + '.json');
+}
 
 const isValidDate = (dateString) => {
   return validator.isISO8601(dateString, { strict: true });

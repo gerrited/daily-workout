@@ -1,7 +1,7 @@
 const OpenAI = require("openai");
 const fs = require('fs');
 const path = require('path');
-const { getDateString, getFilePath } = require('../shared/utils');
+// const { getDateString, getFilePath } = require('../shared/utils');
 require('dotenv').config();
 
 const configuration = {
@@ -30,6 +30,14 @@ Here is an example:
   ]
 }
 `;
+
+const getDateString = (date) => {
+  return date.toISOString().split('T')[0];
+}
+
+const getFilePath = (dirPath, dataString) => {
+  return path.join(dirPath, 'workout-' + dataString + '.json');
+}
 
 async function generateWorkout() {
   try {
