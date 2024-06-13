@@ -43,7 +43,7 @@ async function generateWorkout() {
     var filePath = getFilePath(dirPath, dateString);
 
     if (fs.existsSync(filePath)){
-      console.log(`${filePath} already exists`);
+      console.log(`The file ${filePath} already exists`);
       date.setDate(date.getDate() + 1);
       dateString = getDateString(date);
       filePath = getFilePath(dirPath, dateString);
