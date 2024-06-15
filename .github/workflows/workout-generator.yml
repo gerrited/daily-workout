@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/workout-generator.yml
       - src/workout-generator/**
+  workflow_dispatch:
 
 jobs:
   build-and-push:
