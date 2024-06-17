@@ -10,7 +10,7 @@ const configuration = {
 
 const openai = new OpenAI(configuration);
 const prompt = `
-Generate a JSON object for a workout without equipment. The workout should include 3-5 exercises. Each exercise should have a name and the number of repetitions formatted as "sets x reps". Ensure the JSON follows this structure:
+Generate a JSON object for a daily workout without equipment. The workout should include 3-5 exercises. Each exercise should have a name and the number of repetitions formatted as "sets x reps". Ensure the JSON follows this structure:
 
 {
   "exercises": [
