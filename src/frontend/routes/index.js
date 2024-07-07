@@ -21,20 +21,20 @@ const isValidDate = (dateString) => {
   return validator.isISO8601(dateString, { strict: true });
 };
 
+const getLatestWorkoutDate = () => {
+  const latestFilePath = path.join(getDataFilePath(), 'latest.txt');
+  return fs.readFileSync(latestFilePath);
+};
+
 const getWorkoutFilepath = (date) => {
   const dateString = getDateString(date);
-
-  if (process.env.NODE_ENV === 'development') {
-    const todayDateString = getDateString(new Date());
-
-    if (todayDateString == dateString) {
-      return path.join(__dirname, '..', 'data-example', "workout.json");
-    }
-  }
-
-  const dirPath = path.join(__dirname, '..', 'data');
+  const dirPath = getDataFilePath();
   return getFilePath(dirPath, dateString);
 }
+
+const getDataFilePath = () => {
+  return path.join(__dirname, '..', 'data');
+};
 
 const workoutExists = (date) => {
   const fileName = getWorkoutFilepath(date);
@@ -63,7 +63,7 @@ const render = (res, dateString) => {
 }
 
 router.get('/', (_, res) => {
-  const dateString = getDateString(new Date());
+  const dateString = getLatestWorkoutDate();
   render(res, dateString);
 });
 
