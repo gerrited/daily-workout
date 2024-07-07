@@ -79,6 +79,14 @@ async function generateWorkout() {
       }
     });
 
+    const latestFilePath = path.join(dirPath, 'latest.txt');
+    fs.writeFile(latestFilePath, filePath, (err) => {
+      if (err) {
+        console.error('Error writing latest.txt:', err);
+      } else {
+        console.log('Latest workout is now ' + filePath);
+      }
+    });
 
   } catch (error) {
     console.error('Error generating workout:', error.response ? error.response.data : error.message);
