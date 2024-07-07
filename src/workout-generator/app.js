@@ -80,7 +80,7 @@ async function generateWorkout() {
     });
 
     const latestFilePath = path.join(dirPath, 'latest.txt');
-    fs.writeFile(latestFilePath, filePath, (err) => {
+    fs.writeFile(dateString, dateString, (err) => {
       if (err) {
         console.error('Error writing latest.txt:', err);
       } else {
